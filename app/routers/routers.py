@@ -6,6 +6,7 @@ from .films_sort_by_column import router as less_critiziced_router
 
 def add_routers(app: FastAPI) -> None:
     """
+    Includes all routers to the API
     """
     app.include_router(color_bw_router)
     app.include_router(film_director_router)
