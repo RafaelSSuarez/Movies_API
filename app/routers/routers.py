@@ -1,13 +1,10 @@
 from fastapi import FastAPI
 
-from .color_bw import router as color_bw_router
-from .film_director import router as film_director_router
-from .films_sort_by_column import router as less_critiziced_router
-
+from .count_column_values import router as count_router
+from .films_sort_by_column import router as sort_router
 def add_routers(app: FastAPI) -> None:
     """
     Includes all routers to the API
     """
-    app.include_router(color_bw_router)
-    app.include_router(film_director_router)
-    app.include_router(less_critiziced_router)
+    app.include_router(count_router)
+    app.include_router(sort_router)
