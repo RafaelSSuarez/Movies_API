@@ -1,19 +1,15 @@
 import csv
 import time
 
-from app.core.settings import settings
-
-
-import csv
-import time
-
 from app.core.constants import DATA
 
 
 def count_unique_values(column: str):
     """
-    Returns a dictionary with the respective number of Color and
-      Black and white movies
+    Returns a dictionary with the respective count of unique values in a specific column
+    :param column: The name of the specific column
+    :return: Dictionary whose keys are uniques values of the column and the values are 
+            the respective count
     """
     t1 = time.time()
     DATA.seek(0)
