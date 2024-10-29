@@ -16,6 +16,8 @@ def count_unique_values(column: str):
     result = {}   
     movies = csv.DictReader(DATA)
     for row in movies:
+        if row[column] == '':
+            continue
         if row[column] not in result:
             result.update({row[column]:0})
         result[row[column]] += 1
