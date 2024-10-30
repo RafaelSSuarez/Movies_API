@@ -1,5 +1,16 @@
 from csv import DictReader
 
+from app.core.constants import DATA
+
+
+def read_csv_file():
+    """
+    Read csv file with DictReader
+    :return: csv DictReader
+    """
+    DATA.seek(0)
+    movies = DictReader(DATA)
+    return movies
 
 def sort_csv_reader(
         reader:DictReader,

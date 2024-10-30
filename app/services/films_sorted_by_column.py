@@ -1,7 +1,4 @@
-import csv
-
-from app.core.constants import DATA
-from app.core.utils import sort_csv_reader
+from app.core.utils import read_csv_file,sort_csv_reader
 
 
 def sort_by_column(
@@ -16,7 +13,6 @@ def sort_by_column(
                         else, is sorted from lowest to highest
     :return: Sorted list of dictionaries
     """
-    DATA.seek(0)
-    movies = csv.DictReader(DATA)
-    movies=sort_csv_reader(movies,column_name, highest_first)       
+    movies = read_csv_file()
+    movies = sort_csv_reader(movies,column_name, highest_first)       
     return [{'movie title':row['movie_title'],f'{column_name}':int(row[column_name])} for row in movies[:limit]]

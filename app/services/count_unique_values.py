@@ -1,7 +1,6 @@
-import csv
 import time
 
-from app.core.constants import DATA
+from app.core.utils import read_csv_file
 
 
 def count_unique_values(column: str):
@@ -12,9 +11,8 @@ def count_unique_values(column: str):
             the respective count
     """
     t1 = time.time()
-    DATA.seek(0)
     result = {}   
-    movies = csv.DictReader(DATA)
+    movies = read_csv_file()
     for row in movies:
         if row[column] == '':
             continue
