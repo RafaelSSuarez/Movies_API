@@ -1,3 +1,4 @@
+from collections import defaultdict
 from csv import DictReader
 
 from app.core.constants import DATA
@@ -29,3 +30,29 @@ def sort_csv_reader(
                 key=lambda x: int(x[column_name]), 
                 reverse=reverse
             )
+
+def extract_actors_info(
+        row:dict,
+        actor_number:int, 
+        default_dict:defaultdict) -> None:
+    """
+    Save information about actors of a movie in a default dictionary
+    :param row: Dictionary with information about a movie 
+    :param actor_number: The number assigned to the actor in the dictionary
+    :param default_dict: Dictionary where actors information is going to be saved
+    """
+    actor_name = row[f'actor_{actor_number}_name'].strip()
+    if actor_name:
+        actor_info = default_dict[actor_name] #actor_info is the deafult dict for the actor
+        actor_info['number of movies'] += 1
+        if not actor_info['facebook likes']: actor_info['facebook likes'] = row[f'actor_{actor_number}_facebook_likes']
+        imdb_score = float(row['imdb_score'])
+        if actor_info['best movie imdb score'] < imdb_score:
+            actor_info['best movie imdb score'] = imdb_score
+            actor_info['best movie'] = row['movie_title']
+    if actor_number != 3:
+        extract_actors_info(
+            row=row,
+            actor_number=actor_number+1,
+            default_dict=default_dict)
+    return
